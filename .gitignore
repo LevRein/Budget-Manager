@@ -1,0 +1,11 @@
+node_modules
+dist
+.vscode
+.DS_Store
+.env
+
+# Local history
+*.log
+
+# Vite cache
+node_modules/.vite
