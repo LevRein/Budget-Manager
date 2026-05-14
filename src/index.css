@@ -1562,8 +1562,9 @@ button:hover {
     grid-template-columns: 1fr 1fr;
   }
 
-  /* Category breakdown: single column so value boxes have room */
-  .category-breakdown-grid {
+  /* Category breakdown and category cards: single column so content has room */
+  .category-breakdown-grid,
+  .category-cards-grid {
     grid-template-columns: 1fr;
   }
 

@@ -75,7 +75,7 @@ function Categories({ categories, onAddCategory, onUpdateCategory, onRemoveCateg
         </button>
       </div>
 
-      <div className="summary-grid">
+      <div className="summary-grid category-cards-grid">
         {categories.length > 0 ? (
           categories.map(category => {
             const progress = Math.min(100, Math.round((category.spent / category.budget) * 100));
