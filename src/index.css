@@ -1467,11 +1467,63 @@ button:hover {
   color: var(--text-muted);
 }
 
+/* ── Mobile navigation (hidden on desktop) ── */
+.mobile-nav {
+  display: none;
+}
+
+.mobile-nav-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 0.4rem 0.25rem;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.68rem;
+  font-family: inherit;
+  cursor: pointer;
+  flex: 1;
+  transition: color 0.15s;
+}
+
+.mobile-nav-btn.active {
+  color: #10b981;
+}
+
+.nav-icon {
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
 /* ── Mobile layout ── */
 
 @media (max-width: 640px) {
   .app-shell {
-    padding: 1rem 0.75rem 2.5rem;
+    padding: 1rem 0.75rem 5.5rem;
+  }
+
+  /* Show nav bar, hide inactive tab panels */
+  .mobile-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    justify-content: space-around;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 0.4rem 0 env(safe-area-inset-bottom, 0.4rem);
+    z-index: 200;
+  }
+
+  .tab-panel {
+    display: none;
+  }
+
+  .tab-panel.tab-active {
+    display: block;
   }
 
   header {

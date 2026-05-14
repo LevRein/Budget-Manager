@@ -31,6 +31,7 @@ function App() {
   const supabaseUserRef = useRef<User | null>(null);
 
   const [skipAuth, setSkipAuth] = useState(false);
+  const [mobileTab, setMobileTab] = useState<'summary' | 'insights' | 'categories' | 'transactions'>('summary');
   const [showSettings, setShowSettings] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
   const [showPreferences, setShowPreferences] = useState(false);
@@ -601,35 +602,62 @@ function App() {
       </header>
 
       <main>
-        <BudgetSummary
-          monthlyBudget={state.monthlyBudget}
-          remainingBudget={remainingBudget}
-          totalSpent={totalSpent}
-          categories={categoryTotals}
-        />
+        <div className={`tab-panel${mobileTab === 'summary' ? ' tab-active' : ''}`}>
+          <BudgetSummary
+            monthlyBudget={state.monthlyBudget}
+            remainingBudget={remainingBudget}
+            totalSpent={totalSpent}
+            categories={categoryTotals}
+          />
+        </div>
 
-        <Charts
-          transactions={state.transactions}
-          categories={categoryTotals}
-          monthlyBudget={state.monthlyBudget}
-          theme={state.preferences.theme}
-        />
+        <div className={`tab-panel${mobileTab === 'insights' ? ' tab-active' : ''}`}>
+          <Charts
+            transactions={state.transactions}
+            categories={categoryTotals}
+            monthlyBudget={state.monthlyBudget}
+            theme={state.preferences.theme}
+          />
+        </div>
 
-        <Categories
-          categories={categoryTotals}
-          onAddCategory={addCategory}
-          onUpdateCategory={updateCategory}
-          onRemoveCategory={removeCategory}
-        />
+        <div className={`tab-panel${mobileTab === 'categories' ? ' tab-active' : ''}`}>
+          <Categories
+            categories={categoryTotals}
+            onAddCategory={addCategory}
+            onUpdateCategory={updateCategory}
+            onRemoveCategory={removeCategory}
+          />
+        </div>
 
-        <Transactions
-          transactions={state.transactions}
-          categories={state.categories}
-          onAddTransaction={addTransaction}
-          onUpdateTransaction={updateTransaction}
-          onRemoveTransaction={removeTransaction}
-        />
+        <div className={`tab-panel${mobileTab === 'transactions' ? ' tab-active' : ''}`}>
+          <Transactions
+            transactions={state.transactions}
+            categories={state.categories}
+            onAddTransaction={addTransaction}
+            onUpdateTransaction={updateTransaction}
+            onRemoveTransaction={removeTransaction}
+          />
+        </div>
       </main>
+
+      <nav className="mobile-nav">
+        <button type="button" className={`mobile-nav-btn${mobileTab === 'summary' ? ' active' : ''}`} onClick={() => setMobileTab('summary')}>
+          <span className="nav-icon">🏠</span>
+          <span>Summary</span>
+        </button>
+        <button type="button" className={`mobile-nav-btn${mobileTab === 'insights' ? ' active' : ''}`} onClick={() => setMobileTab('insights')}>
+          <span className="nav-icon">📊</span>
+          <span>Insights</span>
+        </button>
+        <button type="button" className={`mobile-nav-btn${mobileTab === 'categories' ? ' active' : ''}`} onClick={() => setMobileTab('categories')}>
+          <span className="nav-icon">🗂️</span>
+          <span>Categories</span>
+        </button>
+        <button type="button" className={`mobile-nav-btn${mobileTab === 'transactions' ? ' active' : ''}`} onClick={() => setMobileTab('transactions')}>
+          <span className="nav-icon">💳</span>
+          <span>Transactions</span>
+        </button>
+      </nav>
 
       {showSettings && (
         <div className="modal-overlay" onClick={() => setShowSettings(false)}>
