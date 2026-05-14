@@ -1557,9 +1557,14 @@ button:hover {
     margin-left: 0;
   }
 
-  /* Summary cards: two columns on mobile */
+  /* Summary top cards: two columns on mobile */
   .summary-grid {
     grid-template-columns: 1fr 1fr;
+  }
+
+  /* Category breakdown: single column so value boxes have room */
+  .category-breakdown-grid {
+    grid-template-columns: 1fr;
   }
 
   /* Category item: stack on very narrow screens */
